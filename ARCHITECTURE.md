@@ -376,7 +376,7 @@ graph LR
     
     BankARes -->|Leg 2: -100/+100<br/>PENDING AND LINKED<br/>from A to B| BankBRes
     
-    BankBInt -->|Leg 3: +100<br/>PENDING (no linked)<br/>from Bank B Internal| UserB
+    BankBInt -->|Leg 3: +100<br/>PENDING - terminal leg<br/>from Bank B Internal| UserB
     
     style UserA fill:#ffcccc,color:#000
     style BankAInt fill:#ffe6cc,color:#000
