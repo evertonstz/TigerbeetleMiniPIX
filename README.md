@@ -2,6 +2,8 @@
 
 An implementation of Brazil's PIX instant payment system using TigerBeetle for atomic settlement. This simulator demonstrates how to build a production-grade payment system with zero partial states through a 3-legged settlement model and two-phase commit.
 
+This is not production ready by any means, its just a POC implemented by an engineer that had dealed with these systems and is curious with the Tigerbeetle technology :)
+ 
 ## Architecture
 
 For a comprehensive guide to system design, data flows, component interactions, and settlement mechanics, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
