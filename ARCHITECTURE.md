@@ -372,9 +372,9 @@ graph LR
     BankBInt["Bank B Internal<br/>(code=3)<br/>balance=0"]
     UserB["Bob<br/>User Account<br/>(code=10)<br/>balance=500"]
     
-    UserA -->|Leg 1: -100<br/>PENDING|LINKED<br/>to Bank A Internal| BankAInt
+    UserA -->|Leg 1: -100<br/>PENDING AND LINKED<br/>to Bank A Internal| BankAInt
     
-    BankARes -->|Leg 2: -100/+100<br/>PENDING|LINKED<br/>from A to B| BankBRes
+    BankARes -->|Leg 2: -100/+100<br/>PENDING AND LINKED<br/>from A to B| BankBRes
     
     BankBInt -->|Leg 3: +100<br/>PENDING (no linked)<br/>from Bank B Internal| UserB
     
