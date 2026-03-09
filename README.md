@@ -6,7 +6,7 @@ An implementation of Brazil's PIX instant payment system using TigerBeetle for a
 
 For a comprehensive guide to system design, data flows, component interactions, and settlement mechanics, see **[ARCHITECTURE.md](./ARCHITECTURE.md)**.
 
-# Key findings
+## Key findings
 
 For a comparation between implementing this in Tigerbeetle vs general purpose database (PostgreSQL, MongoDB, etc), see **[FINDINGS.md](./FINDINGS.md)**.
 
