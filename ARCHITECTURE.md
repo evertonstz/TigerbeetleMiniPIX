@@ -43,10 +43,10 @@ graph TB
     Redpanda -->|consume PaymentMessage| Clearing
     Clearing -->|CreateTransfers<br/>PostTransfers<br/>VoidTransfers| TigerBeetle
     
-    style LoadTest fill:#ffcccc
-    style Redpanda fill:#fff3e0
-    style Clearing fill:#f3e5f5
-    style TigerBeetle fill:#e8f5e9
+    style LoadTest fill:#ffcccc,color:#000
+    style Redpanda fill:#fff3e0,color:#000
+    style Clearing fill:#f3e5f5,color:#000
+    style TigerBeetle fill:#e8f5e9,color:#000
 ```
 
 ### Deployment Topology
@@ -71,11 +71,11 @@ graph LR
     Engine -->|consume| RP
     LoadTest -->|produce| RP
     
-    style TB fill:#e8f5e9
-    style RP fill:#fff3e0
-    style Seed fill:#e0e0e0
-    style Engine fill:#f3e5f5
-    style LoadTest fill:#ffcccc
+    style TB fill:#e8f5e9,color:#000
+    style RP fill:#fff3e0,color:#000
+    style Seed fill:#e0e0e0,color:#000
+    style Engine fill:#f3e5f5,color:#000
+    style LoadTest fill:#ffcccc,color:#000
 ```
 
 ---
@@ -105,11 +105,11 @@ graph TD
     
     Metrics -->|final report| Report["Benchmark Report<br/>TPS, Latencies"]
     
-    style Producer fill:#fff9c4
-    style PaymentGen fill:#fff9c4
-    style Tracker fill:#f1f8e9
-    style Metrics fill:#e0f2f1
-    style Report fill:#c8e6c9
+    style Producer fill:#fff9c4,color:#000
+    style PaymentGen fill:#fff9c4,color:#000
+    style Tracker fill:#f1f8e9,color:#000
+    style Metrics fill:#e0f2f1,color:#000
+    style Report fill:#c8e6c9,color:#000
 ```
 
 **Key Functions**:
@@ -160,13 +160,13 @@ graph TD
     Retry -->|success| DecisionLogic
     Retry -->|max retries| DeadLetter["Dead Letter<br/>Log error"]
     
-    style Phase1 fill:#e8f5e9
-    style Phase2 fill:#c8e6c9
-    style BankB fill:#fff9c4
-    style Consumer fill:#f3e5f5
-    style P1 fill:#b3e5fc
-    style P2A fill:#81c784
-    style P2B fill:#ef9a9a
+    style Phase1 fill:#e8f5e9,color:#000
+    style Phase2 fill:#c8e6c9,color:#000
+    style BankB fill:#fff9c4,color:#000
+    style Consumer fill:#f3e5f5,color:#000
+    style P1 fill:#b3e5fc,color:#000
+    style P2A fill:#81c784,color:#000
+    style P2B fill:#ef9a9a,color:#000
 ```
 
 **Consumer Loop Process**:
@@ -212,12 +212,12 @@ graph TB
     Flags --> Pending["PENDING flag<br/>Invisible to balance<br/>Until post/void"]
     Flags --> Reserved["RESERVED flag<br/>(optional)<br/>Preview pending transfers"]
     
-    style CB fill:#fff9c4
-    style BR fill:#f1f8e9
-    style BI fill:#e0f2f1
-    style UA fill:#ffcccc
-    style Pending fill:#fff9c4
-    style Linked fill:#e0f2f1
+    style CB fill:#fff9c4,color:#000
+    style BR fill:#f1f8e9,color:#000
+    style BI fill:#e0f2f1,color:#000
+    style UA fill:#ffcccc,color:#000
+    style Pending fill:#fff9c4,color:#000
+    style Linked fill:#e0f2f1,color:#000
 ```
 
 **Account Codes**:
@@ -267,11 +267,11 @@ graph TD
     
     Batch --> Report["4. Print Report<br/>Total: 5,011 accounts"]
     
-    style CB fill:#fff9c4
-    style BR fill:#f1f8e9
-    style BI fill:#e0f2f1
-    style UA fill:#ffcccc
-    style Batch fill:#e1bee7
+    style CB fill:#fff9c4,color:#000
+    style BR fill:#f1f8e9,color:#000
+    style BI fill:#e0f2f1,color:#000
+    style UA fill:#ffcccc,color:#000
+    style Batch fill:#e1bee7,color:#000
 ```
 
 **Idempotency**:
@@ -314,12 +314,12 @@ graph TD
     
     Commit -->|ack| LoadTest_Track["Load Test Tracker<br/>Polls consumer group offset<br/>Detects: offset = N+1<br/>Records E2E latency"]
     
-    style P1 fill:#b3e5fc
-    style P2A fill:#81c784
-    style P2B fill:#ef9a9a
-    style Posted fill:#c8e6c9
-    style Voided fill:#ffcccc
-    style Commit fill:#e1bee7
+    style P1 fill:#b3e5fc,color:#000
+    style P2A fill:#81c784,color:#000
+    style P2B fill:#ef9a9a,color:#000
+    style Posted fill:#c8e6c9,color:#000
+    style Voided fill:#ffcccc,color:#000
+    style Commit fill:#e1bee7,color:#000
 ```
 
 ### State Transitions
@@ -345,14 +345,14 @@ graph LR
     Posted -->|Commit offset| Confirmed["Confirmed<br/>(offset committed<br/>Message processed)"]
     Voided -->|Commit offset| Confirmed
     
-    style Queued fill:#fff9c4
-    style Processing fill:#b3e5fc
-    style PendingLeg fill:#fff9c4
-    style AcceptDecision fill:#c8e6c9
-    style RejectDecision fill:#ffcccc
-    style Posted fill:#c8e6c9
-    style Voided fill:#ffcccc
-    style Confirmed fill:#e0f2f1
+    style Queued fill:#fff9c4,color:#000
+    style Processing fill:#b3e5fc,color:#000
+    style PendingLeg fill:#fff9c4,color:#000
+    style AcceptDecision fill:#c8e6c9,color:#000
+    style RejectDecision fill:#ffcccc,color:#000
+    style Posted fill:#c8e6c9,color:#000
+    style Voided fill:#ffcccc,color:#000
+    style Confirmed fill:#e0f2f1,color:#000
 ```
 
 ---
@@ -378,12 +378,12 @@ graph LR
     
     BankBInt -->|Leg 3: +100<br/>PENDING (no linked)<br/>from Bank B Internal| UserB
     
-    style UserA fill:#ffcccc
-    style BankAInt fill:#ffe6cc
-    style BankARes fill:#ffcccc
-    style BankBRes fill:#ffffcc
-    style BankBInt fill:#e6ccff
-    style UserB fill:#ccffcc
+    style UserA fill:#ffcccc,color:#000
+    style BankAInt fill:#ffe6cc,color:#000
+    style BankARes fill:#ffcccc,color:#000
+    style BankBRes fill:#ffffcc,color:#000
+    style BankBInt fill:#e6ccff,color:#000
+    style UserB fill:#ccffcc,color:#000
 ```
 
 **Why 3 Legs?**
@@ -465,11 +465,11 @@ graph TB
     P2ARetry -->|success| Commit1
     P2BRetry -->|success| Commit2
     
-    style P1 fill:#b3e5fc
-    style P2A fill:#81c784
-    style P2B fill:#ef9a9a
-    style Commit1 fill:#e0f2f1
-    style Commit2 fill:#ffebee
+    style P1 fill:#b3e5fc,color:#000
+    style P2A fill:#81c784,color:#000
+    style P2B fill:#ef9a9a,color:#000
+    style Commit1 fill:#e0f2f1,color:#000
+    style Commit2 fill:#ffebee,color:#000
 ```
 
 **Key Invariants**:
@@ -500,14 +500,14 @@ graph TB
     Ledger --> BxI["... 3 more internals<br/>code=3"]
     Ledger --> UA["User Accounts<br/>code=10<br/>ID=10000...14999<br/>balance varies<br/>flag: debits_must_not_exceed_credits"]
     
-    style CB fill:#fff9c4
-    style BA fill:#f1f8e9
-    style BB fill:#f1f8e9
-    style Bx fill:#f1f8e9
-    style AIx fill:#e0f2f1
-    style BIx fill:#e0f2f1
-    style BxI fill:#e0f2f1
-    style UA fill:#ffcccc
+    style CB fill:#fff9c4,color:#000
+    style BA fill:#f1f8e9,color:#000
+    style BB fill:#f1f8e9,color:#000
+    style Bx fill:#f1f8e9,color:#000
+    style AIx fill:#e0f2f1,color:#000
+    style BIx fill:#e0f2f1,color:#000
+    style BxI fill:#e0f2f1,color:#000
+    style UA fill:#ffcccc,color:#000
 ```
 
 **Advantages**:
@@ -537,9 +537,9 @@ graph TD
     
     Transfer --> Reserved["RESERVED<br/>(optional)<br/>Preview pending balance<br/>---<br/>Useful for pre-flight checks<br/>Not used in this impl"]
     
-    style Pending fill:#fff9c4
-    style Linked fill:#e0f2f1
-    style Reserved fill:#f1f8e9
+    style Pending fill:#fff9c4,color:#000
+    style Linked fill:#e0f2f1,color:#000
+    style Reserved fill:#f1f8e9,color:#000
 ```
 
 ---
@@ -579,12 +579,12 @@ graph LR
     
     Tracker -->|detect confirmation| Metrics["Metrics<br/>Calculate E2E latency"]
     
-    style Pool fill:#fff9c4
-    style W1 fill:#e0f2f1
-    style W2 fill:#e0f2f1
-    style W3 fill:#e0f2f1
-    style Tracker fill:#f1f8e9
-    style Metrics fill:#c8e6c9
+    style Pool fill:#fff9c4,color:#000
+    style W1 fill:#e0f2f1,color:#000
+    style W2 fill:#e0f2f1,color:#000
+    style W3 fill:#e0f2f1,color:#000
+    style Tracker fill:#f1f8e9,color:#000
+    style Metrics fill:#c8e6c9,color:#000
 ```
 
 **Performance Characteristics**:
@@ -627,12 +627,12 @@ graph TD
     
     TB2 --> Commit["Commit Offset"]
     
-    style Batch1 fill:#fff9c4
-    style Submit1 fill:#e0f2f1
-    style TB1 fill:#c8e6c9
-    style Batch2 fill:#fff9c4
-    style Submit2 fill:#e0f2f1
-    style TB2 fill:#c8e6c9
+    style Batch1 fill:#fff9c4,color:#000
+    style Submit1 fill:#e0f2f1,color:#000
+    style TB1 fill:#c8e6c9,color:#000
+    style Batch2 fill:#fff9c4,color:#000
+    style Submit2 fill:#e0f2f1,color:#000
+    style TB2 fill:#c8e6c9,color:#000
 ```
 
 **Batching Strategy**:
@@ -666,11 +666,11 @@ graph TD
     
     Unknown --> UErr["Other errors<br/>---<br/>Action: log and give up"]
     
-    style Terminal fill:#ffebee
-    style Retryable fill:#fff9c4
-    style TNT fill:#b3e5fc
-    style TIO fill:#b3e5fc
-    style KErr fill:#b3e5fc
+    style Terminal fill:#ffebee,color:#000
+    style Retryable fill:#fff9c4,color:#000
+    style TNT fill:#b3e5fc,color:#000
+    style TIO fill:#b3e5fc,color:#000
+    style KErr fill:#b3e5fc,color:#000
 ```
 
 **Retry Strategy**:
@@ -707,11 +707,11 @@ graph LR
     P2 -->|FAIL| Retry2["Retry Phase 2<br/>offset NOT committed"]
     Retry2 -->|pending transfers exist| P2
     
-    style P1 fill:#b3e5fc
-    style P2 fill:#e0f2f1
-    style Commit fill:#c8e6c9
-    style Retry1 fill:#ffcccc
-    style Retry2 fill:#fff9c4
+    style P1 fill:#b3e5fc,color:#000
+    style P2 fill:#e0f2f1,color:#000
+    style Commit fill:#c8e6c9,color:#000
+    style Retry1 fill:#ffcccc,color:#000
+    style Retry2 fill:#fff9c4,color:#000
 ```
 
 **Crash Safety**:
@@ -743,12 +743,12 @@ graph TB
     Integration --> E2E["integration_test.go<br/>Full 2PC flow<br/>Offset commit<br/>Batch accumulator"]
     Integration --> LoadTest["loadtest<br/>E2E latency<br/>P50/P95/P99<br/>TPS"]
     
-    style P1 fill:#e0f2f1
-    style P1R fill:#b3e5fc
-    style P2 fill:#e0f2f1
-    style BA fill:#fff9c4
-    style E2E fill:#c8e6c9
-    style LoadTest fill:#ffcccc
+    style P1 fill:#e0f2f1,color:#000
+    style P1R fill:#b3e5fc,color:#000
+    style P2 fill:#e0f2f1,color:#000
+    style BA fill:#fff9c4,color:#000
+    style E2E fill:#c8e6c9,color:#000
+    style LoadTest fill:#ffcccc,color:#000
 ```
 
 ### Verification Checklist
@@ -767,11 +767,11 @@ graph TD
     
     Verify --> E["E2E<br/>---<br/>[] Producer latency measured<br/>[] E2E latency measured<br/>[] P50/P95/P99 calculated"]
     
-    style A fill:#e0f2f1
-    style I fill:#f1f8e9
-    style B fill:#fff9c4
-    style O fill:#e6ccff
-    style E fill:#ffcccc
+    style A fill:#e0f2f1,color:#000
+    style I fill:#f1f8e9,color:#000
+    style B fill:#fff9c4,color:#000
+    style O fill:#e6ccff,color:#000
+    style E fill:#ffcccc,color:#000
 ```
 
 ### Load Test Verification
@@ -793,10 +793,10 @@ graph LR
     Report -->|Producer P95| PP95["✓ Producer P95 < 1ms"]
     Report -->|E2E P95| EP95["✓ E2E P95 > Producer P95<br/>(adds Phase 2 overhead)"]
     
-    style Producer fill:#b3e5fc
-    style E2E fill:#e0f2f1
-    style Report fill:#c8e6c9
-    style TPS fill:#81c784
-    style PP95 fill:#81c784
-    style EP95 fill:#81c784
+    style Producer fill:#b3e5fc,color:#000
+    style E2E fill:#e0f2f1,color:#000
+    style Report fill:#c8e6c9,color:#000
+    style TPS fill:#81c784,color:#000
+    style PP95 fill:#81c784,color:#000
+    style EP95 fill:#81c784,color:#000
 ```
