@@ -1,0 +1,85 @@
+name: tigerbeetle-minipix
+
+services:
+  # TigerBeetle Format Initialization Service (Single Node)
+  # This service runs once to format the data file, then exits.
+  tigerbeetle-format:
+    image: ghcr.io/tigerbeetle/tigerbeetle:0.16.75
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - /tigerbeetle format --cluster=0 --replica=0 --replica-count=1 /data/0_0.tigerbeetle
+    volumes:
+      - tb_data_0:/data
+    network_mode: host
+    security_opt:
+      - seccomp=unconfined
+
+  # TigerBeetle Single Node
+  tigerbeetle:
+    image: ghcr.io/tigerbeetle/tigerbeetle:0.16.75
+    entrypoint: /tigerbeetle
+    command:
+      - start
+      - --addresses=127.0.0.1:3001
+      - /data/0_0.tigerbeetle
+    depends_on:
+      tigerbeetle-format:
+        condition: service_completed_successfully
+    volumes:
+      - tb_data_0:/data
+    network_mode: host
+    security_opt:
+      - seccomp=unconfined
+    ports:
+      - "3001:3001"
+    healthcheck:
+      test: ["CMD", "sleep", "0.1"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - ""
+
+  # Redpanda Message Broker
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v25.3.10
+    container_name: redpanda
+    command:
+      - redpanda
+      - start
+      - --kafka-addr=internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr=internal://redpanda:9092,external://localhost:19092
+      - --pandaproxy-addr=internal://0.0.0.0:8082,external://0.0.0.0:18082
+      - --advertise-pandaproxy-addr=internal://redpanda:8082,external://localhost:18082
+      - --schema-registry-addr=internal://0.0.0.0:8081,external://0.0.0.0:18081
+      - --rpc-addr=redpanda:33145
+      - --advertise-rpc-addr=redpanda:33145
+      - --mode=dev-container
+      - --smp=1
+      - --default-log-level=info
+    ports:
+      - "19092:19092"  # External Kafka
+      - "9092:9092"    # Internal Kafka
+      - "9644:9644"    # Admin
+      - "8081:8081"    # Schema Registry
+      - "8082:8082"    # HTTP Proxy
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    networks:
+      - minipix_net
+    healthcheck:
+      test: ["CMD-SHELL", "rpk cluster info --brokers localhost:9092 || exit 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    profiles:
+      - ""
+
+networks:
+  minipix_net:
+    driver: bridge
+
+volumes:
+  tb_data_0:
+  redpanda_data:
