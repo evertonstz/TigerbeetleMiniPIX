@@ -516,6 +516,13 @@ graph TB
 3. **Simpler logic**: No ledger routing tables or mapping
 4. **Single journal**: All transfers in one journal (easier auditing)
 
+**Disadvantages**:
+1. **Scalability limits**: Single ledger becomes a bottleneck as transaction volume grows; TigerBeetle clusters have finite throughput per ledger
+2. **No regulatory isolation**: All account types in one ledger; some regulations require separate ledgers for different entity types or risk categories
+3. **Fixed account structure**: Adding new account types requires code changes and potential data migration; less flexible for evolving requirements
+4. **ID space constraints**: 64-bit IDs limit total accounts; with 5,000 users, 5 banks, and internal accounts, scaling to millions requires careful ID allocation strategy
+5. **Difficult multi-currency support**: Single ledger assumes one currency; multi-currency requires separate ledgers per currency or complex accounting
+
 **Account Identification**:
 
 ```
